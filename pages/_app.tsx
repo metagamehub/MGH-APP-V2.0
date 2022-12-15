@@ -9,6 +9,7 @@ import Layout from '../layouts/Layout'
 
 import '/styles/nprogress.css' //styles of nprogress
 import '../styles/globals.css'
+import '../styles/stake.css'
 import MobileControl from '../components/MobileControl'
 
 NProgress.configure({ showSpinner: false })
