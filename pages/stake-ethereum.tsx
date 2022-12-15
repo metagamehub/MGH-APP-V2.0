@@ -71,7 +71,7 @@ const EthereumStaking: NextPage = () => {
             )}
 
 
-            <div className="flex flex-col items-center  w-full bg-grey-lightest rounded-xl h-full p-10">
+            <div className="flex flex-col items-center mt-24 w-full bg-grey-lightest rounded-xl h-full p-10">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-5 justify-items-center w-full mt-8 xl:mt-0">
 
