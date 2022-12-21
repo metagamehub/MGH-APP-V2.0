@@ -18,12 +18,13 @@ const URL = 'http://localhost:3001/login/'
 // Firebase Init
 const firebaseConfig = {
     apiKey: process.env.FIREBASE,
-    authDomain: 'mgh-app-d6122.firebaseapp.com',
-    projectId: 'mgh-app-d6122',
-    storageBucket: 'mgh-app-d6122.appspot.com',
-    messagingSenderId: '335800469615',
-    appId: '1:335800469615:web:a90434b4ff8ff6e9c2259a',
-    measurementId: 'G-SYMJ1J305Q',
+    authDomain: "metagamehub-dao.firebaseapp.com",
+    databaseURL: "https://metagamehub-dao-default-rtdb.firebaseio.com",
+    projectId: "metagamehub-dao",
+    storageBucket: "metagamehub-dao.appspot.com",
+    messagingSenderId: "1071402036524",
+    appId: "1:1071402036524:web:21b06e73ea8c5bf8705089",
+    measurementId: "G-KSLHBV36N0"
 }
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
