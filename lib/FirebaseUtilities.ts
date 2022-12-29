@@ -11,6 +11,7 @@ import {
     setDoc,
 } from 'firebase/firestore/lite'
 import { Score } from '../components/Valuation/LandLikeBox'
+import { ValuationTile } from './heatmap/heatmapCommonTypes'
 import { Metaverse } from './metaverse'
 
 const URL = 'http://localhost:3001/login/'
@@ -135,13 +136,7 @@ export async function likeLand(
         return await updateDoc(land, {
             likes: arrayRemove(address),
         })
-
-    await updateDoc(land, {
-        likes: arrayUnion(address),
-    })
-    await updateDoc(land, {
-        dislikes: arrayRemove(address),
-    })
+   
 }
 
 // Dislike Land Valuation
