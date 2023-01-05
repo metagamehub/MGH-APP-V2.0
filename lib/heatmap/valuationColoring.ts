@@ -84,7 +84,7 @@ const CalculateMaxPriceOnHistoryDependGivenDays = (
 export const setLandColour = async (
     land: any,
     filter: MapFilter,
-    wholeData:any
+    wholeData: any
 ) => {
     const getLandDependingOnGivenNumberOfDays = (
         land: any,
@@ -100,17 +100,16 @@ export const setLandColour = async (
         return counter
     }
     const MAX_DIFF = 400
-    
-    let max = wholeData[filter].max,
-    limits = wholeData[filter].limits
 
-    // GENERATE PERCENTAGE FOR TILE.
+    let max = wholeData[filter].max,
+        limits = wholeData[filter].limits
+
+    const diff = land.current_price_eth / land.eth_predicted_price - 1
     const priceDiffPercentage = getPercentage(
-        land.current_price_eth,
+        diff,
         land.eth_predicted_price,
         limits
     )
-
     const valuationOptions: any = {
         transfers: getPercentage(land?.history?.length, max, limits),
         price_difference: !land?.current_price_eth
@@ -131,7 +130,7 @@ export const setLandColour = async (
             ? getPercentage(
                   CalculateMaxPriceOnHistoryDependGivenDays(land, 30),
                   max,
-                  limits
+                  { minimum: 0, maximum: 3 }
               )
             : NaN,
     }
@@ -157,7 +156,7 @@ export const setLandColour = async (
 export const setColours = async (
     valuationAtlas: Record<string, any>,
     filter: MapFilter,
-    wholeData:any
+    wholeData: any
 ) => {
     const getLandDependingOnGivenNumberOfDays = (
         land: any,
@@ -174,14 +173,18 @@ export const setColours = async (
     }
     const MAX_DIFF = 400
 
-    console.log(wholeData,filter)
+    console.log(wholeData, filter)
     let max = wholeData[filter].max,
         limits = wholeData[filter].limits
 
     // GENERATE PERCENTAGE FOR EACH TILE.
     typedKeys(valuationAtlas).map((valuation) => {
+        const diff =
+            valuationAtlas[valuation].current_price_eth /
+                valuationAtlas[valuation].eth_predicted_price -
+            1
         const priceDiffPercentage = getPercentage(
-            valuationAtlas[valuation].current_price_eth,
+            diff,
             valuationAtlas[valuation].eth_predicted_price,
             limits
         )
@@ -210,16 +213,13 @@ export const setColours = async (
                 max,
                 limits
             ),
-            last_month_sells: getLandDependingOnGivenNumberOfDays(valuation, 30)
-                ? getPercentage(
-                      CalculateMaxPriceOnHistoryDependGivenDays(
-                          valuationAtlas[valuation],
-                          30
-                      ),
-                      max,
-                      limits
-                  )
-                : NaN,
+        last_month_sells: getLandDependingOnGivenNumberOfDays(valuationAtlas[valuation], 30)
+            ? getPercentage(
+                  CalculateMaxPriceOnHistoryDependGivenDays(valuationAtlas[valuation], 30),
+                  max,
+                  { minimum: 0, maximum: 3 }
+              )
+            : NaN,
         }
 
         let percent = NaN
